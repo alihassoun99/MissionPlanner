@@ -1558,6 +1558,27 @@
       <field type="float" name="rpm1">RPM Sensor1.</field>
       <field type="float" name="rpm2">RPM Sensor2.</field>
     </message>
+   
+    <!-- Delta  :  Message costum provenant de l'ardupilot : le type = int16_t est correct et fonctionnelle (car il existe deja d'autre exemple comme lui dans les autres messages Mavlink)-->
+
+    <message id="227" name="SIDESLIP">
+      <description>Sideslip sensor output.</description>
+      <field type="int16_t" name="deviation_angle">Deviation angle.</field>
+    </message>
+    
+    <message id="228" name="CAPTEUR_CHARGE">
+      <description>capteur de charge sensor output.</description>
+      <field type="int16_t" name="valeur_Charge">Charge value.</field>
+    </message>
+        
+    <message id="229" name="CAPTEUR_RPM">
+      <description>RPM sensor output.</description>
+      <field type="int16_t" name="capteur_rpm_1">valeur rpm 1 capteur.</field>
+      <field type="int16_t" name="capteur_rpm_2">valeur rpm 2 capteur.</field>
+      <field type="int16_t" name="capteur_rpm_3">valeur rpm 3 capteur.</field>
+      <field type="int16_t" name="capteur_rpm_4">valeur rpm 4 capteur.</field>
+    </message>
+    
     <!-- ardupilot specific mavlink2 messages starting at 11000-->
     <message id="11000" name="DEVICE_OP_READ">
       <description>Read registers for a device.</description>

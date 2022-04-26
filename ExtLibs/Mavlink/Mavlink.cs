@@ -205,6 +205,12 @@ public partial class MAVLink
         new message_info(219, "GOPRO_SET_RESPONSE", 162, 2, 2, typeof( mavlink_gopro_set_response_t )),
         new message_info(225, "EFI_STATUS", 142, 53, 65, typeof( mavlink_efi_status_t )),
         new message_info(226, "RPM", 207, 8, 8, typeof( mavlink_rpm_t )),
+
+        // Nouveax message mavelink
+        new message_info(227, "SIDESLIP", 237, 2, 2, typeof( mavlink_sideslip_t )),
+        new message_info(228, "CAPTEUR_CHARGE", 237, 2, 2, typeof( mavlink_capteur_charge_t )),
+        new message_info(229, "CAPTEUR_RPM", 237, 2, 2, typeof( mavlink_capteur_rpm_t )),
+
         new message_info(230, "ESTIMATOR_STATUS", 163, 42, 42, typeof( mavlink_estimator_status_t )),
         new message_info(231, "WIND_COV", 105, 40, 40, typeof( mavlink_wind_cov_t )),
         new message_info(232, "GPS_INPUT", 151, 63, 65, typeof( mavlink_gps_input_t )),
@@ -468,6 +474,12 @@ public partial class MAVLink
         GOPRO_SET_RESPONSE = 219,
         EFI_STATUS = 225,
         RPM = 226,
+
+        // Nouveax message mavelink
+        SIDESLIP = 227,
+        CAPTEUR_CHARGE = 228,
+        CAPTEUR_RPM = 229,
+
         ESTIMATOR_STATUS = 230,
         WIND_COV = 231,
         GPS_INPUT = 232,
@@ -7252,6 +7264,73 @@ public partial class MAVLink
     
     };
 
+    // Nouveau message mavlink
+    
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
+    ///<summary> sideslip sensor output. </summary>
+    public struct mavlink_sideslip_t
+    {
+        public mavlink_sideslip_t(System.Int16 angle)
+        {
+            this.angle = angle;
+
+        }
+        /// <summary>sideslip Sensor.   </summary>
+        [Units("deg")]
+        [Description("sideslip Sensor.")]
+        public System.Int16 angle;
+
+    };
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
+    ///<summary> charge sensor output. </summary>
+    public struct mavlink_capteur_charge_t
+    {
+        public mavlink_capteur_charge_t(System.Int16 charge)
+        {
+            this.charge = charge;
+
+        }
+        /// <summary> charge Sensor.   </summary>
+        [Units("N")]
+        [Description("charge Sensor.")]
+        public System.Int16 charge;
+
+    };
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
+    ///<summary> rpm sensor output. </summary>
+    public struct mavlink_capteur_rpm_t
+    {
+        public mavlink_capteur_rpm_t(System.Int16 rpm1, System.Int16 rpm2, System.Int16 rpm3, System.Int16 rpm4)
+        {
+            this.rpm1 = rpm1;
+            this.rpm2 = rpm2;
+            this.rpm3 = rpm3;
+            this.rpm4 = rpm4;
+
+        }
+        /// <summary> rpm Sensor.   </summary>
+        [Units("rpm")]
+        [Description("rpm1 Sensor.")]
+        public System.Int16 rpm1;
+
+        /// <summary> rpm Sensor.   </summary>
+        [Units("rpm")]
+        [Description("rpm2 Sensor.")]
+        public System.Int16 rpm2;
+
+        /// <summary> rpm Sensor.   </summary>
+        [Units("rpm")]
+        [Description("rpm3 Sensor.")]
+        public System.Int16 rpm3;
+
+        /// <summary> rpm Sensor.   </summary>
+        [Units("rpm")]
+        [Description("rpm4 Sensor.")]
+        public System.Int16 rpm4;
+
+    };
 
     [StructLayout(LayoutKind.Sequential,Pack=1,Size=51)]
     ///<summary> Read registers for a device. </summary>

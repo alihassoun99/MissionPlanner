@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 
+
 namespace MissionPlanner
 {
     public class CurrentState : ICloneable, IDisposable
@@ -39,6 +40,14 @@ namespace MissionPlanner
 
         public static int KIndexstatic = -1;
         private float _airspeed;
+
+        //Nouveau message Mavlink
+        public static Int16 _sideslip = -1;
+        public static Int16 _capteurcharge = -1;
+        public static Int16 _capteurrpm1 = -1;
+        public static Int16 _capteurrpm2 = -1;
+        public static Int16 _capteurrpm3 = -1;
+        public static Int16 _capteurrpm4 = -1;
 
         private float _alt;
         private float _alt_error;
@@ -402,6 +411,54 @@ namespace MissionPlanner
             get => _airspeed * multiplierspeed;
             set => _airspeed = value;
         }
+
+        // speeds
+        [DisplayText("Capteur de Charge")]
+        public Int16 sideslip
+        {
+            get => _sideslip;
+            set => _sideslip = value;
+        }
+
+        // RPM1
+        [DisplayText("CapteurRPM1 (rpm)")]
+        public Int16 CapteurRPM1
+        {
+            get => _capteurrpm1;
+            set => _capteurrpm1 = value;
+        }
+
+        //RPM2
+        [DisplayText("CapteurRPM2 (rpm)")]
+        public Int16 CapteurRPM2
+        {
+            get => _capteurrpm2;
+            set => _capteurrpm2 = value;
+        }
+
+        //RPM3
+        [DisplayText("CapteurRPM3 (rpm)")]
+        public Int16 CapteurRPM3
+        {
+            get => _capteurrpm3;
+            set => _capteurrpm3 = value;
+        }
+
+        //RPM4
+        [DisplayText("CapteurRPM4 (rpm)")]
+        public Int16 CapteurRPM4
+        {
+            get => _capteurrpm4;
+            set => _capteurrpm4 = value;
+        }
+
+        [DisplayText("CapteurCharge (charge)")]
+        public Int16 CapteurCharge
+        {
+            get => _capteurcharge;
+            set => _capteurcharge = value;
+        }
+
 
         [DisplayText("Airspeed Target (speed)")]
         public float targetairspeed { get; private set; }
@@ -1107,6 +1164,7 @@ namespace MissionPlanner
         [GroupText("Battery")] public double battery_cell4 { get; set; }
         [GroupText("Battery")] public double battery_cell5 { get; set; }
         [GroupText("Battery")] public double battery_cell6 { get; set; }
+        [GroupText("Battery")] public double battery_cell_test { get; set; }
 
         [GroupText("Battery")] public double battery_temp { get; set; }
 
@@ -1634,10 +1692,15 @@ namespace MissionPlanner
 
         private void Parent_OnPacketReceived(object sender, MAVLink.MAVLinkMessage mavLinkMessage)
         {
+            // test
+            //Console.WriteLine("checking messages1");
+
             if (mavLinkMessage.sysid == parent.sysid && mavLinkMessage.compid == parent.compid 
                 || mavLinkMessage.msgid == (uint)MAVLink.MAVLINK_MSG_ID.RADIO // propagate the RADIO/RADIO_STATUS message across all devices on this link
                 || mavLinkMessage.msgid == (uint)MAVLink.MAVLINK_MSG_ID.RADIO_STATUS)
             {
+                // test
+                //Console.WriteLine("checking messages1.5");
                 switch (mavLinkMessage.msgid)
                 {
                     case (uint) MAVLink.MAVLINK_MSG_ID.RC_CHANNELS_SCALED:
@@ -1754,6 +1817,8 @@ namespace MissionPlanner
                     }
 
                         break;
+
+
                     case (uint) MAVLink.MAVLINK_MSG_ID.HIGH_LATENCY:
 
 
@@ -1794,6 +1859,7 @@ namespace MissionPlanner
                         altasl = highlatency.altitude_amsl;
                         alt = highlatency.altitude_sp;
                         airspeed = highlatency.airspeed;
+
                         targetairspeed = highlatency.airspeed_sp;
                         groundspeed = highlatency.groundspeed;
                         climbrate = highlatency.climb_rate;
@@ -2598,6 +2664,51 @@ namespace MissionPlanner
                     }
 
                         break;
+
+                    // Pour le nouveau message mavlink 
+
+                    case (uint)MAVLink.MAVLINK_MSG_ID.SIDESLIP:
+                        {
+
+                            // test
+
+                            Console.WriteLine("CurrentState.cs : test message - MAVLINK_MSG_ID ");
+                            var sideslip_1 = mavLinkMessage.ToStructure<MAVLink.mavlink_sideslip_t>();
+
+                            sideslip = sideslip_1.angle;
+                        }
+
+                        break;
+
+                    case (uint)MAVLink.MAVLINK_MSG_ID.CAPTEUR_CHARGE:
+                        {
+
+                            // test
+
+                            Console.WriteLine("CurrentState.cs : test message - MAVLINK_MSG_ID ");
+                            var capteurcharge_1 = mavLinkMessage.ToStructure<MAVLink.mavlink_capteur_charge_t>();
+
+                            CapteurCharge = capteurcharge_1.charge;
+                        }
+
+                        break;
+
+                    case (uint)MAVLink.MAVLINK_MSG_ID.CAPTEUR_RPM:
+                        {
+
+                            // test
+
+                            Console.WriteLine("CurrentState.cs : test message - MAVLINK_MSG_ID ");
+                            var capteurRPM_1 = mavLinkMessage.ToStructure<MAVLink.mavlink_capteur_rpm_t>();
+
+                            CapteurRPM1 = capteurRPM_1.rpm1;
+                            CapteurRPM2 = capteurRPM_1.rpm2;
+                            CapteurRPM3 = capteurRPM_1.rpm3;
+                            CapteurRPM4 = capteurRPM_1.rpm4;
+                        }
+
+                        break;
+
                     case (uint) MAVLink.MAVLINK_MSG_ID.RC_CHANNELS_RAW:
 
                     {
@@ -3169,6 +3280,16 @@ namespace MissionPlanner
                             mavinterface.requestDatastream(MAVLink.MAV_DATA_STREAM.RC_CHANNELS, MAV.cs.raterc,
                                 MAV.sysid,
                                 MAV.compid); // request rc info
+                            
+                            MAVLink.MAVLinkMessage mavLinkMessage = MAV.getPacket((uint)MAVLink.MAVLINK_MSG_ID.SIDESLIP);
+                            /*
+                            if (mavLinkMessage != null)
+                            {
+                                var aero = mavLinkMessage.ToStructure<MAVLink.mavlink_sideslip_t>();
+
+                                Int16 angle = (Int16)(aero.angle);
+                            } 
+                            */
                         }
                         catch
                         {
@@ -3254,6 +3375,16 @@ namespace MissionPlanner
                 seen = true;
                 bitArray = new BitArray(new[] {(int) p});
             }
+
+
+            // Nouveau message Mavlink
+           /* public Int16 SIDESLIP { 
+                get; 
+                set;
+            }
+
+            */
+
 
             public bool gyro
             {
