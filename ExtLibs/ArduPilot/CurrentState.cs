@@ -41,13 +41,21 @@ namespace MissionPlanner
         public static int KIndexstatic = -1;
         private float _airspeed;
 
-        //Nouveau message Mavlink
+        //Nouveau message Mavlink : Delta
+        
         public static Int16 _sideslip = -1;
-        public static Int16 _capteurcharge = -1;
+        
+        public static Int16 _capteurcharge = -100;
+
         public static Int16 _capteurrpm1 = -1;
         public static Int16 _capteurrpm2 = -1;
         public static Int16 _capteurrpm3 = -1;
         public static Int16 _capteurrpm4 = -1;
+
+        public static Int32 _resultatCalcule = -1;
+
+
+        // // //
 
         private float _alt;
         private float _alt_error;
@@ -412,11 +420,12 @@ namespace MissionPlanner
             set => _airspeed = value;
         }
 
+        // DELTA
         // speeds
-        [DisplayText("Capteur de Charge")]
+        [DisplayText("Side Slip")]
         public Int16 sideslip
         {
-            get => _sideslip;
+            get => _sideslip ;
             set => _sideslip = value;
         }
 
@@ -458,7 +467,15 @@ namespace MissionPlanner
             get => _capteurcharge;
             set => _capteurcharge = value;
         }
+        
+        [DisplayText("Resultat Calcule")]
+        public Int32 ResulatCalcule
+        {
+            get => _resultatCalcule;
+            set => _resultatCalcule = value;
+        }
 
+        /// ////////////////////////////////////
 
         [DisplayText("Airspeed Target (speed)")]
         public float targetairspeed { get; private set; }
@@ -2675,7 +2692,8 @@ namespace MissionPlanner
                             Console.WriteLine("CurrentState.cs : test message - MAVLINK_MSG_ID ");
                             var sideslip_1 = mavLinkMessage.ToStructure<MAVLink.mavlink_sideslip_t>();
 
-                            sideslip = sideslip_1.angle;
+                             sideslip = sideslip_1.angle;
+                            // sideslip = 2;
                         }
 
                         break;
@@ -2706,7 +2724,18 @@ namespace MissionPlanner
                             CapteurRPM3 = capteurRPM_1.rpm3;
                             CapteurRPM4 = capteurRPM_1.rpm4;
                         }
+                        
+                        break;
+                    case (uint)MAVLink.MAVLINK_MSG_ID.RECEIVE_CALCUL_MICRO:
+                        {
 
+                            // DELTA
+
+                            Console.WriteLine("CurrentState.cs : test message - RECEIVE_CALCUL_MICRO ");
+                            var calcule_result = mavLinkMessage.ToStructure<MAVLink.mavlink_recive_calcule_t>();
+
+                            ResulatCalcule = calcule_result.resultat;
+                        }
                         break;
 
                     case (uint) MAVLink.MAVLINK_MSG_ID.RC_CHANNELS_RAW:

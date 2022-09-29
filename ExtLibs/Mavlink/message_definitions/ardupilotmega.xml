@@ -1579,6 +1579,18 @@
       <field type="int16_t" name="capteur_rpm_4">valeur rpm 4 capteur.</field>
     </message>
     
+     <message id="236" name="SEND_CALCUL_MICRO">
+	      <description>Sending calcul to be done.</description>
+	      <field type="int8_t" name="type_calcule">type de calcul.</field>
+	      <field type="int8_t" name="valeur1">valeur a calculer 1.</field>
+	      <field type="int8_t" name="valeur2">valeur a calculer 2.</field>
+    </message>
+    
+    <message id="237" name="RECEIVE_CALCUL_MICRO">
+	      <description>Sending calcul to be done.</description>
+	      <field type="int32_t" name="valeur">valeur du calcul.</field>
+    </message>
+    
     <!-- ardupilot specific mavlink2 messages starting at 11000-->
     <message id="11000" name="DEVICE_OP_READ">
       <description>Read registers for a device.</description>

@@ -206,10 +206,13 @@ public partial class MAVLink
         new message_info(225, "EFI_STATUS", 142, 53, 65, typeof( mavlink_efi_status_t )),
         new message_info(226, "RPM", 207, 8, 8, typeof( mavlink_rpm_t )),
 
-        // Nouveax message mavelink
+        // Delta : Nouveax message mavelink
         new message_info(227, "SIDESLIP", 237, 2, 2, typeof( mavlink_sideslip_t )),
         new message_info(228, "CAPTEUR_CHARGE", 237, 2, 2, typeof( mavlink_capteur_charge_t )),
         new message_info(229, "CAPTEUR_RPM", 237, 2, 2, typeof( mavlink_capteur_rpm_t )),
+        new message_info(237, "RECIVE_CALCULE", 237, 2, 2, typeof( mavlink_recive_calcule_t )),
+
+        //
 
         new message_info(230, "ESTIMATOR_STATUS", 163, 42, 42, typeof( mavlink_estimator_status_t )),
         new message_info(231, "WIND_COV", 105, 40, 40, typeof( mavlink_wind_cov_t )),
@@ -479,6 +482,8 @@ public partial class MAVLink
         SIDESLIP = 227,
         CAPTEUR_CHARGE = 228,
         CAPTEUR_RPM = 229,
+        RECEIVE_CALCUL_MICRO = 237,
+        //
 
         ESTIMATOR_STATUS = 230,
         WIND_COV = 231,
@@ -7264,7 +7269,7 @@ public partial class MAVLink
     
     };
 
-    // Nouveau message mavlink
+    // Nouveau message mavlink : DELTA
     
     [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
     ///<summary> sideslip sensor output. </summary>
@@ -7329,6 +7334,22 @@ public partial class MAVLink
         [Units("rpm")]
         [Description("rpm4 Sensor.")]
         public System.Int16 rpm4;
+
+    };
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 4)]
+    ///<summary> charge sensor output. </summary>
+    public struct mavlink_recive_calcule_t
+    {
+        public mavlink_recive_calcule_t(System.Int32 resultat)
+        {
+            this.resultat = resultat;
+
+        }
+        /// <summary> charge Sensor.   </summary>
+        [Units(".")]
+        [Description("calcule recieve delta")]
+        public System.Int32 resultat;
 
     };
 
@@ -7639,7 +7660,6 @@ public partial class MAVLink
               this.time_usec = time_usec;
               this.AOA = AOA;
               this.SSA = SSA;
-            
         }
         /// <summary>Timestamp (since boot or Unix epoch).  [us] </summary>
         [Units("[us]")]
