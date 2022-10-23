@@ -964,6 +964,10 @@ Mission Planner waits for 2 valid heartbeat packets before connecting");
         /// <param name="indata">struct of data</param>
         public void generatePacket(int messageType, object indata, int sysid, int compid, bool forcemavlink2 = false, bool forcesigning = false)
         {
+            // to test packet Generation : Delta project
+            Console.WriteLine("TEST : GENERATEPACKET / MESSAGETYPE : " + messageType.ToString());
+            Console.WriteLine("TEST : GENERATEPACKET / data : " + indata.ToString());
+
             if (BaseStream == null || !BaseStream.IsOpen)
             {
                 return;

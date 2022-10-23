@@ -87,7 +87,7 @@ namespace MissionPlanner
             lSeries1.Values.Add((float)(valeur_capteur_charge));
             // lSeries.Values.Add(sideslip);
 
-            if (lSeries.Values.Count >= 5000)
+            if (lSeries.Values.Count >= 10)
             {
                 incomingDataTimer.Stop();
             }
@@ -162,17 +162,36 @@ namespace MissionPlanner
         {
 
             MAVLinkInterface mavInterface = new MAVLinkInterface();
-            MAVLink _mav = new MAVLink();
 
             int sysidcurrent = mavInterface.sysidcurrent;
             int compidcurrent = mavInterface.compidcurrent;
+
+            // validation des informations
+            int nb1 = int.Parse(textBox1.Text);
+            int nb2 = int.Parse(textBox2.Text);
+
+            // button 1 est clicker : alors c'est une addition
+            // pour tester le boutton
+            int nb3 = nb1 + nb2;
+
+            MAVLink.mavlink_commande_calcule_t cmdMavlink = new MAVLink.mavlink_commande_calcule_t
+            {
+                nb1 = nb1,
+                nb2 = nb2,
+                operation = 1 // 1 : addition ; 2 : soustraction;
+            };
+
+            mavInterface.generatePacket((byte)236, cmdMavlink, sysidcurrent, compidcurrent, true, true);
+
+            CurrentState state = new CurrentState();
+            int valeur_addition = state.ResulatCalcule;
+
+            string nb3_str = nb3.ToString();
             
+            Console.WriteLine("TEST : Boutton 1 clicked : " + valeur_addition);
 
-            mavInterface.generatePacket((byte)236, new MAVLink.mavlink_commande_calcule_t() , sysidcurrent, compidcurrent, true, true);
-
-
-            Console.WriteLine("TEST : Boutton 1 clicked : " + text1);
-            textBox3.Text = text1;
+            Console.WriteLine("TEST : Boutton 1 clicked : " + nb3_str);
+            textBox3.Text = nb3_str;
 
         }
 
@@ -200,13 +219,42 @@ namespace MissionPlanner
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            MAVLinkInterface mavInterface2 = new MAVLinkInterface();
+
+            int sysidcurrent2 = mavInterface2.sysidcurrent;
+            int compidcurrent2 = mavInterface2.compidcurrent;
+
+            // validation des informations
+            int nb1 = int.Parse(textBox4.Text);
+            int nb2 = int.Parse(textBox5.Text);
+
+            // button 1 est clicker : alors c'est une addition
+            // pour tester le boutton
+            int nb3 = nb1 - nb2;
+
+            MAVLink.mavlink_commande_calcule_t cmdMavlink2 = new MAVLink.mavlink_commande_calcule_t
+            {
+                nb1 = nb1,
+                nb2 = nb2,
+                operation = 1 // 1 : addition ; 2 : soustraction;
+            };
+
+            mavInterface2.generatePacket((byte)236, cmdMavlink2, sysidcurrent2, compidcurrent2, true, true);
+
+            CurrentState state = new CurrentState();
+            int valeur_soustraction = state.ResulatCalcule;
+
+            string nb3_str = nb3.ToString();
+            Console.WriteLine("TEST : Boutton 2 clicked : " + valeur_soustraction);
+            Console.WriteLine("TEST : Boutton 2 clicked : " + nb3_str);
+            textBox6.Text = nb3_str;
+
+        }
     }
 
-
-
-    //  public class data
-    //   {
-    //     public int hauteur { get; set; }
-    //    public string name { get; set; }
-    //}    
+  
 }

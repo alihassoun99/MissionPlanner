@@ -42,16 +42,17 @@ namespace MissionPlanner
             this.btnExport = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.lblDate = new System.Windows.Forms.Label();
-            this.panel1 = new BSE.Windows.Forms.Panel();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
             this.DataGraphique = new System.Windows.Forms.BindingSource(this.components);
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlNavigation.SuspendLayout();
             this.pnlDonnees.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGraphique)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
             this.SuspendLayout();
@@ -83,12 +84,15 @@ namespace MissionPlanner
             this.pnlNavigation.BackColor = System.Drawing.Color.Transparent;
             this.pnlNavigation.CaptionFont = new System.Drawing.Font("Segoe UI", 11.75F, System.Drawing.FontStyle.Bold);
             this.pnlNavigation.CaptionHeight = 27;
+            this.pnlNavigation.Controls.Add(this.textBox6);
+            this.pnlNavigation.Controls.Add(this.button2);
+            this.pnlNavigation.Controls.Add(this.textBox5);
+            this.pnlNavigation.Controls.Add(this.textBox4);
             this.pnlNavigation.Controls.Add(this.textBox3);
             this.pnlNavigation.Controls.Add(this.button1);
             this.pnlNavigation.Controls.Add(this.textBox2);
             this.pnlNavigation.Controls.Add(this.textBox1);
             this.pnlNavigation.Controls.Add(this.pnlDonnees);
-            this.pnlNavigation.Controls.Add(this.panel1);
             this.pnlNavigation.CustomColors.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(184)))), ((int)(((byte)(184)))));
             this.pnlNavigation.CustomColors.CaptionCloseIcon = System.Drawing.SystemColors.ControlText;
             this.pnlNavigation.CustomColors.CaptionExpandIcon = System.Drawing.SystemColors.ControlText;
@@ -118,7 +122,7 @@ namespace MissionPlanner
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(14, 98);
+            this.textBox3.Location = new System.Drawing.Point(14, 60);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(173, 20);
             this.textBox3.TabIndex = 5;
@@ -127,7 +131,7 @@ namespace MissionPlanner
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(84, 69);
+            this.button1.Location = new System.Drawing.Point(82, 31);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(28, 23);
             this.button1.TabIndex = 4;
@@ -137,7 +141,7 @@ namespace MissionPlanner
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(118, 71);
+            this.textBox2.Location = new System.Drawing.Point(118, 31);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(69, 20);
             this.textBox2.TabIndex = 3;
@@ -145,7 +149,7 @@ namespace MissionPlanner
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(14, 71);
+            this.textBox1.Location = new System.Drawing.Point(12, 31);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(64, 20);
             this.textBox1.TabIndex = 2;
@@ -176,10 +180,10 @@ namespace MissionPlanner
             this.pnlDonnees.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlDonnees.ForeColor = System.Drawing.SystemColors.ControlText;
             this.pnlDonnees.Image = null;
-            this.pnlDonnees.Location = new System.Drawing.Point(1, 142);
+            this.pnlDonnees.Location = new System.Drawing.Point(1, 450);
             this.pnlDonnees.MinimumSize = new System.Drawing.Size(27, 27);
             this.pnlDonnees.Name = "pnlDonnees";
-            this.pnlDonnees.Size = new System.Drawing.Size(198, 437);
+            this.pnlDonnees.Size = new System.Drawing.Size(198, 129);
             this.pnlDonnees.TabIndex = 1;
             this.pnlDonnees.Text = "Données";
             this.pnlDonnees.ToolTipTextCloseIcon = null;
@@ -189,7 +193,7 @@ namespace MissionPlanner
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(12, 206);
+            this.btnExport.Location = new System.Drawing.Point(11, 87);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(128, 31);
             this.btnExport.TabIndex = 3;
@@ -199,7 +203,7 @@ namespace MissionPlanner
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(12, 180);
+            this.dateTimePicker1.Location = new System.Drawing.Point(11, 61);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(128, 20);
             this.dateTimePicker1.TabIndex = 2;
@@ -208,56 +212,12 @@ namespace MissionPlanner
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(8, 153);
+            this.lblDate.Location = new System.Drawing.Point(12, 34);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(52, 24);
             this.lblDate.TabIndex = 0;
             this.lblDate.Text = "Date";
             this.lblDate.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.AssociatedSplitter = null;
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.CaptionFont = new System.Drawing.Font("Segoe UI", 11.75F, System.Drawing.FontStyle.Bold);
-            this.panel1.CaptionHeight = 27;
-            this.panel1.Controls.Add(this.btnRefresh);
-            this.panel1.CustomColors.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(184)))), ((int)(((byte)(184)))));
-            this.panel1.CustomColors.CaptionCloseIcon = System.Drawing.SystemColors.ControlText;
-            this.panel1.CustomColors.CaptionExpandIcon = System.Drawing.SystemColors.ControlText;
-            this.panel1.CustomColors.CaptionGradientBegin = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
-            this.panel1.CustomColors.CaptionGradientEnd = System.Drawing.SystemColors.ButtonFace;
-            this.panel1.CustomColors.CaptionGradientMiddle = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.panel1.CustomColors.CaptionSelectedGradientBegin = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(215)))), ((int)(((byte)(243)))));
-            this.panel1.CustomColors.CaptionSelectedGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(215)))), ((int)(((byte)(243)))));
-            this.panel1.CustomColors.CaptionText = System.Drawing.SystemColors.ControlText;
-            this.panel1.CustomColors.CollapsedCaptionText = System.Drawing.SystemColors.ControlText;
-            this.panel1.CustomColors.ContentGradientBegin = System.Drawing.SystemColors.ButtonFace;
-            this.panel1.CustomColors.ContentGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
-            this.panel1.CustomColors.InnerBorderColor = System.Drawing.SystemColors.Window;
-            this.panel1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel1.Image = null;
-            this.panel1.Location = new System.Drawing.Point(4, 31);
-            this.panel1.MinimumSize = new System.Drawing.Size(27, 27);
-            this.panel1.Name = "panel1";
-            this.panel1.ShowCaptionbar = false;
-            this.panel1.Size = new System.Drawing.Size(192, 35);
-            this.panel1.TabIndex = 0;
-            this.panel1.Text = "panel1";
-            this.panel1.ToolTipTextCloseIcon = null;
-            this.panel1.ToolTipTextExpandIconPanelCollapsed = null;
-            this.panel1.ToolTipTextExpandIconPanelExpanded = null;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.Location = new System.Drawing.Point(53, 3);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnRefresh.TabIndex = 0;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
             // 
             // cartesianChart1
             // 
@@ -277,6 +237,38 @@ namespace MissionPlanner
             this.form1BindingSource.DataSource = typeof(MissionPlanner.Form1);
             this.form1BindingSource.CurrentChanged += new System.EventHandler(this.form1BindingSource_CurrentChanged);
             // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(12, 86);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(64, 20);
+            this.textBox4.TabIndex = 6;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(118, 86);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(69, 20);
+            this.textBox5.TabIndex = 7;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(84, 86);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(28, 23);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "-";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(14, 112);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(173, 20);
+            this.textBox6.TabIndex = 9;
+            this.textBox6.Text = "Resultat";
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -293,7 +285,6 @@ namespace MissionPlanner
             this.pnlNavigation.PerformLayout();
             this.pnlDonnees.ResumeLayout(false);
             this.pnlDonnees.PerformLayout();
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGraphique)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -304,8 +295,6 @@ namespace MissionPlanner
 
         private System.Windows.Forms.Panel pnlHeader;
         private BSE.Windows.Forms.Panel pnlNavigation;
-        private BSE.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnRefresh;
         private BSE.Windows.Forms.Panel pnlDonnees;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Button btnExport;
@@ -320,6 +309,10 @@ namespace MissionPlanner
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox6;
     }
 }
 
