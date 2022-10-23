@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Timers;
+﻿using LiveCharts;
 using LiveCharts.Wpf;
-using LiveCharts;
+using System;
+using System.Linq;
+using System.Timers;
+using System.Windows.Forms;
 
 namespace MissionPlanner
 {
@@ -21,7 +15,7 @@ namespace MissionPlanner
         private LineSeries lSeries1;
         private Random random = new Random();
         private LiveCharts.Wpf.Axis AxisX = new LiveCharts.Wpf.Axis();
-
+        private MAVLink _mavlink;
         public string text1;
 
         public Form1()
@@ -33,7 +27,7 @@ namespace MissionPlanner
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            
+
             //DataGraphique.DataSource ;
             // var ressources = new List<data>();
             // ressources.Add(new data() { hauteur = 2, name = "Ali" });
@@ -66,14 +60,14 @@ namespace MissionPlanner
                 LabelFormatter = value => value.ToString("0.00")
             });
 
-            
+
             lSeries.Values = new ChartValues<float>();
             lSeries1.Values = new ChartValues<float>();
             series.Add(lSeries);
             series.Add(lSeries1);
             cartesianChart1.Series = series;
 
-            
+
 
             incomingDataTimer.Elapsed += new ElapsedEventHandler(AddRandomItemToChart);
             incomingDataTimer.Interval = 100; // 1000 ms is one second
@@ -86,7 +80,7 @@ namespace MissionPlanner
             // float val = (float)CurrentState._sideslip;
             CurrentState state = new CurrentState();
             short valeur_side_slip = state.sideslip;
-            short valeur_capteur_charge = state.CapteurCharge; 
+            short valeur_capteur_charge = state.CapteurCharge;
             //Console.WriteLine("TEST addRandomItemToChart   :   valeur sideslip  val = : " + valeur_capteur_charge.ToString());
             // lSeries.Values.Add((float)(random.NextDouble() * 20.0));
             lSeries.Values.Add((float)(valeur_side_slip));
@@ -95,7 +89,7 @@ namespace MissionPlanner
 
             if (lSeries.Values.Count >= 5000)
             {
-                  incomingDataTimer.Stop();
+                incomingDataTimer.Stop();
             }
         }
 
@@ -135,7 +129,7 @@ namespace MissionPlanner
 
         private void chart1_Click_1(object sender, EventArgs e)
         {
-            
+
         }
 
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
@@ -167,6 +161,16 @@ namespace MissionPlanner
         private void button1_Click_1(object sender, EventArgs e)
         {
 
+            MAVLinkInterface mavInterface = new MAVLinkInterface();
+            MAVLink _mav = new MAVLink();
+
+            int sysidcurrent = mavInterface.sysidcurrent;
+            int compidcurrent = mavInterface.compidcurrent;
+            
+
+            mavInterface.generatePacket((byte)236, new MAVLink.mavlink_commande_calcule_t() , sysidcurrent, compidcurrent, true, true);
+
+
             Console.WriteLine("TEST : Boutton 1 clicked : " + text1);
             textBox3.Text = text1;
 
@@ -194,15 +198,15 @@ namespace MissionPlanner
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
     }
 
 
 
-  //  public class data
- //   {
-   //     public int hauteur { get; set; }
+    //  public class data
+    //   {
+    //     public int hauteur { get; set; }
     //    public string name { get; set; }
     //}    
 }

@@ -978,7 +978,9 @@ Mission Planner waits for 2 valid heartbeat packets before connecting");
                     messageType == (byte)MAVLINK_MSG_ID.PARAM_REQUEST_LIST ||
                     messageType == (byte)MAVLINK_MSG_ID.PARAM_REQUEST_READ ||
                     messageType == (byte)MAVLINK_MSG_ID.RALLY_FETCH_POINT ||
-                    messageType == (byte)MAVLINK_MSG_ID.FENCE_FETCH_POINT
+                    messageType == (byte)MAVLINK_MSG_ID.FENCE_FETCH_POINT || 
+                    // Delta 
+                    messageType == (byte)MAVLINK_MSG_ID.SEND_CALCUL_MICRO
                     )
                 {
                 }

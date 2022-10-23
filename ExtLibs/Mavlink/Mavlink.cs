@@ -211,6 +211,7 @@ public partial class MAVLink
         new message_info(228, "CAPTEUR_CHARGE", 237, 2, 2, typeof( mavlink_capteur_charge_t )),
         new message_info(229, "CAPTEUR_RPM", 237, 2, 2, typeof( mavlink_capteur_rpm_t )),
         new message_info(237, "RECIVE_CALCULE", 237, 2, 2, typeof( mavlink_recive_calcule_t )),
+        new message_info(236, "SEND_CALCUL_MICRO", 237, 2, 2, typeof( mavlink_commande_calcule_t )),
 
         //
 
@@ -483,6 +484,7 @@ public partial class MAVLink
         CAPTEUR_CHARGE = 228,
         CAPTEUR_RPM = 229,
         RECEIVE_CALCUL_MICRO = 237,
+        SEND_CALCUL_MICRO = 236,
         //
 
         ESTIMATOR_STATUS = 230,
@@ -14903,6 +14905,34 @@ public partial class MAVLink
         [MarshalAs(UnmanagedType.ByValArray,SizeConst=10)]
 		public byte[] name;
     
+    };
+
+    // DELTA
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 18)]
+    ///<summary> </summary>
+    public struct mavlink_commande_calcule_t
+    {
+        public mavlink_commande_calcule_t(float nb1, float nb2, int operation)
+        {
+            this.nb1 = nb1;
+            this.nb2 = nb2;
+            this.operation = operation;
+
+        }
+        /// <summary> </summary>
+        [Units("")]
+        [Description("")]
+        public float nb1;
+        /// <summary>  </summary>
+        [Units("")]
+        [Description("Floating point value")]
+        public float nb2;
+        /// <summary> </summary>
+        [Units("")]
+        [Description("")]
+        public int operation;
+
     };
 
 

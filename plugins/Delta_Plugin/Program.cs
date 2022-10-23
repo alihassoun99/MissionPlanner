@@ -1,12 +1,4 @@
-﻿using System;
-using System.Windows.Input;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using MissionPlanner.Controls;
-
-namespace MissionPlanner
+﻿namespace MissionPlanner
 {
     public class Program : MissionPlanner.Plugin.Plugin
     {
@@ -74,7 +66,7 @@ namespace MissionPlanner
 
         public bool testloop()
         {
-            
+
             return true;
         }
 
