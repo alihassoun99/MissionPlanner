@@ -1581,9 +1581,9 @@
     
      <message id="236" name="SEND_CALCUL_MICRO">
 	      <description>Sending calcul to be done.</description>
-	      <field type="int8_t" name="type_calcule">type de calcul.</field>
-	      <field type="int8_t" name="valeur1">valeur a calculer 1.</field>
-	      <field type="int8_t" name="valeur2">valeur a calculer 2.</field>
+	      <field type="int32_t" name="valeur1">valeur a calculer 2.</field>
+	      <field type="int32_t" name="valeur2">valeur a calculer 2.</field>
+	      <field type="int32_t" name="type_calcule">type de calcul.</field>
     </message>
     
     <message id="237" name="RECEIVE_CALCUL_MICRO">

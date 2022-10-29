@@ -163,35 +163,41 @@ namespace MissionPlanner
 
             MAVLinkInterface mavInterface = new MAVLinkInterface();
 
-            int sysidcurrent = mavInterface.sysidcurrent;
-            int compidcurrent = mavInterface.compidcurrent;
+            //int sysidcurrent = mavInterface.sysidcurrent;
+            //int compidcurrent = mavInterface.compidcurrent;
 
             // validation des informations
-            int nb1 = int.Parse(textBox1.Text);
-            int nb2 = int.Parse(textBox2.Text);
+            //int nb1 = int.Parse(textBox1.Text);
+            //int nb2 = int.Parse(textBox2.Text);
 
             // button 1 est clicker : alors c'est une addition
             // pour tester le boutton
-            int nb3 = nb1 + nb2;
+            //int nb3 = nb1 + nb2;
 
-            MAVLink.mavlink_commande_calcule_t cmdMavlink = new MAVLink.mavlink_commande_calcule_t
-            {
-                nb1 = nb1,
-                nb2 = nb2,
-                operation = 1 // 1 : addition ; 2 : soustraction;
-            };
+            //MAVLink.mavlink_commande_calcule_t cmdMavlink = new MAVLink.mavlink_commande_calcule_t
+            //{
+            //    nb1 = nb1,
+            //    nb2 = nb2,
+            //    operation = 1 // 1 : addition ; 2 : soustraction;
+            //};
 
-            mavInterface.generatePacket((byte)236, cmdMavlink, sysidcurrent, compidcurrent, true, true);
+            //mavInterface.generatePacket((byte)236, cmdMavlink, sysidcurrent, compidcurrent, true, true);
 
-            CurrentState state = new CurrentState();
-            int valeur_addition = state.ResulatCalcule;
+            // TEST 
 
-            string nb3_str = nb3.ToString();
+            Console.WriteLine("TEST : Form1 AVANT calculate_delta");
+            mavInterface.calculate_delta(1, 1, 1);
+            Console.WriteLine("TEST : Form1 APRES calculate_delta");
+
+            //CurrentState state = new CurrentState();
+            //int valeur_addition = state.ResulatCalcule;
+
+            //string nb3_str = nb3.ToString();
             
-            Console.WriteLine("TEST : Boutton 1 clicked : " + valeur_addition);
+            //Console.WriteLine("TEST : Boutton 1 clicked : " + valeur_addition);
 
-            Console.WriteLine("TEST : Boutton 1 clicked : " + nb3_str);
-            textBox3.Text = nb3_str;
+            //Console.WriteLine("TEST : Boutton 1 clicked : " + nb3_str);
+            //textBox3.Text = nb3_str;
 
         }
 

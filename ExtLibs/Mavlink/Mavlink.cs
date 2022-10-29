@@ -14909,11 +14909,11 @@ public partial class MAVLink
 
     // DELTA
 
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 18)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 40)]
     ///<summary> </summary>
     public struct mavlink_commande_calcule_t
     {
-        public mavlink_commande_calcule_t(float nb1, float nb2, int operation)
+        public mavlink_commande_calcule_t(int nb1, int nb2, int operation)
         {
             this.nb1 = nb1;
             this.nb2 = nb2;
@@ -14922,15 +14922,15 @@ public partial class MAVLink
         }
         /// <summary> </summary>
         [Units("")]
-        [Description("")]
-        public float nb1;
+        [Description("Floating number 1 value")]
+        public int nb1;
         /// <summary>  </summary>
         [Units("")]
-        [Description("Floating point value")]
-        public float nb2;
+        [Description("Floating number 2 value")]
+        public int nb2;
         /// <summary> </summary>
         [Units("")]
-        [Description("")]
+        [Description("operation de calcule a faire")]
         public int operation;
 
     };

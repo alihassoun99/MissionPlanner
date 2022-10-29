@@ -965,11 +965,12 @@ Mission Planner waits for 2 valid heartbeat packets before connecting");
         public void generatePacket(int messageType, object indata, int sysid, int compid, bool forcemavlink2 = false, bool forcesigning = false)
         {
             // to test packet Generation : Delta project
-            Console.WriteLine("TEST : GENERATEPACKET / MESSAGETYPE : " + messageType.ToString());
-            Console.WriteLine("TEST : GENERATEPACKET / data : " + indata.ToString());
+            Console.WriteLine("TEST : MAVLinkInterface.cs DANS generatePacket : MESSAGE TYPE = " + messageType.ToString());
+            Console.WriteLine("TEST : MAVLinkInterface.cs DANS generatePacket : indata = " + indata.ToString());
 
             if (BaseStream == null || !BaseStream.IsOpen)
             {
+                Console.WriteLine("TEST : MAVLinkInterface.cs DANS generatePacket : BASESTREAM = NULL");
                 return;
             }
 
@@ -987,9 +988,11 @@ Mission Planner waits for 2 valid heartbeat packets before connecting");
                     messageType == (byte)MAVLINK_MSG_ID.SEND_CALCUL_MICRO
                     )
                 {
+                    Console.WriteLine("TEST : MAVLinkInterface.cs DANS generatePacket : MESSAGE TYPE ALLOWED!!");
                 }
                 else
                 {
+                    Console.WriteLine("TEST : MAVLinkInterface.cs DANS generatePacket : MESSAGE TYPE NOT ALLOWED!!");
                     return;
                 }
             }
@@ -1148,6 +1151,7 @@ Mission Planner waits for 2 valid heartbeat packets before connecting");
 
                 if (BaseStream.IsOpen)
                 {
+                    Console.WriteLine("TEST : MAVLinkInterface.cs DANS generatePacket : BASE STREAM IS OPEN TO WRITE!!");
                     BaseStream.Write(packet, 0, i);
                     _bytesSentSubj.OnNext(i);
                 }
@@ -1921,6 +1925,25 @@ Mission Planner waits for 2 valid heartbeat packets before connecting");
         {
             return setWPCurrentAsync(sysid, compid, index).AwaitSync();
         }
+
+        public async void calculate_delta(int nb1, int nb2, int op) 
+        {
+
+            Console.WriteLine("TEST : MAVLinkInterface.cs DANS calculate_delta");
+            mavlink_commande_calcule_t req = new mavlink_commande_calcule_t();
+
+            req.nb1 = nb1;
+            req.nb2 = nb2;
+            req.operation = op;
+
+            Console.WriteLine("TEST : MAVLinkInterface.cs DANS calculate_delta : ");
+            Console.WriteLine("TEST : MAVLinkInterface.cs req  =  " + req.ToString());
+
+            Console.WriteLine("TEST : MAVLinkInterface.cs AVANT generatePacket : ");
+            generatePacket((byte)MAVLINK_MSG_ID.SEND_CALCUL_MICRO, req);
+            Console.WriteLine("TEST : MAVLinkInterface.cs APRES generatePacket : ");
+        }
+
         public async Task<bool> setWPCurrentAsync(byte sysid, byte compid, ushort index)
         {
             giveComport = true;
