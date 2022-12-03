@@ -1558,9 +1558,11 @@
       <field type="float" name="rpm1">RPM Sensor1.</field>
       <field type="float" name="rpm2">RPM Sensor2.</field>
     </message>
-   
-    <!-- Delta  :  Message costum provenant de l'ardupilot : le type = int16_t est correct et fonctionnelle (car il existe deja d'autre exemple comme lui dans les autres messages Mavlink)-->
 
+    <!-- Projet_Delta -->
+    <!-- Delta  :  Message costum provenant de l'ardupilot : le type = int16_t est correct et fonctionnelle (car il existe deja d'autre exemple comme lui dans les autres messages Mavlink)-->
+    <!-- _____________________________________________________________________________________________________________________________________________________________________________________ -->
+    
     <message id="227" name="SIDESLIP">
       <description>Sideslip sensor output.</description>
       <field type="int16_t" name="deviation_angle">Deviation angle.</field>
@@ -1590,6 +1592,8 @@
 	      <description>Sending calcul to be done.</description>
 	      <field type="int32_t" name="valeur">valeur du calcul.</field>
     </message>
+    
+    <!-- _____________________________________________________________________________________________________________________________________________________________________________________ -->
     
     <!-- ardupilot specific mavlink2 messages starting at 11000-->
     <message id="11000" name="DEVICE_OP_READ">

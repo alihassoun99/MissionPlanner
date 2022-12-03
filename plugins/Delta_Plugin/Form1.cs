@@ -27,14 +27,6 @@ namespace MissionPlanner
         private void Form1_Load(object sender, EventArgs e)
         {
 
-
-            //DataGraphique.DataSource ;
-            // var ressources = new List<data>();
-            // ressources.Add(new data() { hauteur = 2, name = "Ali" });
-            // ressources.Add(new data() { hauteur = 3, name = "test" });
-
-            // DataGraphique.DataSource = ressources;
-
             incomingDataTimer = new System.Timers.Timer();
             series = new SeriesCollection();
             lSeries = new LineSeries();
@@ -42,18 +34,11 @@ namespace MissionPlanner
 
             AxisX.Title = "temps";
             AxisX.LabelFormatter = value => value.ToString("0");
-            //AxisX.MaxValue = 4000;
+
+            //AxisX.MaxValue = 4000;  // Possibilité de changer selon le besoin
 
             cartesianChart1.AxisX.Add(AxisX);
-            /**
-            cartesianChart1.AxisX.Add(new LiveCharts.Wpf.Axis
-            {
-                Title = "temps",
-                LabelFormatter = value => value.ToString("0"),
-                MaxValue = 100
-                //ValueType = ChartValueType.DateTime;
-            }); ;
-            **/
+
             cartesianChart1.AxisY.Add(new LiveCharts.Wpf.Axis
             {
                 Title = "Valeurs",
@@ -76,12 +61,12 @@ namespace MissionPlanner
 
         public void AddRandomItemToChart(object source, ElapsedEventArgs e)
         {
-            // code here will run every second
+            // le code ici va s'executer chaque seconde
             // float val = (float)CurrentState._sideslip;
             CurrentState state = new CurrentState();
             short valeur_side_slip = state.sideslip;
             short valeur_capteur_charge = state.CapteurCharge;
-            //Console.WriteLine("TEST addRandomItemToChart   :   valeur sideslip  val = : " + valeur_capteur_charge.ToString());
+            // Console.WriteLine("TEST addRandomItemToChart   :   valeur sideslip  val = : " + valeur_capteur_charge.ToString());
             // lSeries.Values.Add((float)(random.NextDouble() * 20.0));
             lSeries.Values.Add((float)(valeur_side_slip));
             lSeries1.Values.Add((float)(valeur_capteur_charge));
@@ -154,50 +139,19 @@ namespace MissionPlanner
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
-            text1 = textBox1.Text;
-            Console.WriteLine("TEST : textBox1 = " + textBox1.Text);
+            //text1 = textBox1.Text;
+            //Console.WriteLine("TEST : textBox1 = " + textBox1.Text);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
 
-            MAVLinkInterface mavInterface = new MAVLinkInterface();
+            // MAVLinkInterface mavInterface = new MAVLinkInterface();
 
-            //int sysidcurrent = mavInterface.sysidcurrent;
-            //int compidcurrent = mavInterface.compidcurrent;
+            // Console.WriteLine("TEST : Form1 AVANT calculate_delta");
+            // mavInterface.calculate_delta(1, 1, 1);
+            // Console.WriteLine("TEST : Form1 APRES calculate_delta");
 
-            // validation des informations
-            //int nb1 = int.Parse(textBox1.Text);
-            //int nb2 = int.Parse(textBox2.Text);
-
-            // button 1 est clicker : alors c'est une addition
-            // pour tester le boutton
-            //int nb3 = nb1 + nb2;
-
-            //MAVLink.mavlink_commande_calcule_t cmdMavlink = new MAVLink.mavlink_commande_calcule_t
-            //{
-            //    nb1 = nb1,
-            //    nb2 = nb2,
-            //    operation = 1 // 1 : addition ; 2 : soustraction;
-            //};
-
-            //mavInterface.generatePacket((byte)236, cmdMavlink, sysidcurrent, compidcurrent, true, true);
-
-            // TEST 
-
-            Console.WriteLine("TEST : Form1 AVANT calculate_delta");
-            mavInterface.calculate_delta(1, 1, 1);
-            Console.WriteLine("TEST : Form1 APRES calculate_delta");
-
-            //CurrentState state = new CurrentState();
-            //int valeur_addition = state.ResulatCalcule;
-
-            //string nb3_str = nb3.ToString();
-            
-            //Console.WriteLine("TEST : Boutton 1 clicked : " + valeur_addition);
-
-            //Console.WriteLine("TEST : Boutton 1 clicked : " + nb3_str);
-            //textBox3.Text = nb3_str;
 
         }
 
@@ -229,35 +183,31 @@ namespace MissionPlanner
         private void button2_Click(object sender, EventArgs e)
         {
 
-            MAVLinkInterface mavInterface2 = new MAVLinkInterface();
+            //MAVLinkInterface mavInterface2 = new MAVLinkInterface();
 
-            int sysidcurrent2 = mavInterface2.sysidcurrent;
-            int compidcurrent2 = mavInterface2.compidcurrent;
+            //int sysidcurrent2 = mavInterface2.sysidcurrent;
+            //int compidcurrent2 = mavInterface2.compidcurrent;
 
             // validation des informations
-            int nb1 = int.Parse(textBox4.Text);
-            int nb2 = int.Parse(textBox5.Text);
+            //int nb1 = int.Parse(textBox4.Text);
+            //int nb2 = int.Parse(textBox5.Text);
 
             // button 1 est clicker : alors c'est une addition
             // pour tester le boutton
-            int nb3 = nb1 - nb2;
 
-            MAVLink.mavlink_commande_calcule_t cmdMavlink2 = new MAVLink.mavlink_commande_calcule_t
-            {
-                nb1 = nb1,
-                nb2 = nb2,
-                operation = 1 // 1 : addition ; 2 : soustraction;
-            };
+            //MAVLink.mavlink_commande_calcule_t cmdMavlink2 = new MAVLink.mavlink_commande_calcule_t
+            //{
+            //    nb1 = nb1,
+            //    nb2 = nb2,
+            //    operation = 1 // 1 : addition ; 2 : soustraction;
+            //};
 
-            mavInterface2.generatePacket((byte)236, cmdMavlink2, sysidcurrent2, compidcurrent2, true, true);
+            //mavInterface2.generatePacket((byte)236, cmdMavlink2, sysidcurrent2, compidcurrent2, true, true);
 
-            CurrentState state = new CurrentState();
-            int valeur_soustraction = state.ResulatCalcule;
+            //CurrentState state = new CurrentState();
+            //int valeur_soustraction = state.ResulatCalcule;
 
-            string nb3_str = nb3.ToString();
-            Console.WriteLine("TEST : Boutton 2 clicked : " + valeur_soustraction);
-            Console.WriteLine("TEST : Boutton 2 clicked : " + nb3_str);
-            textBox6.Text = nb3_str;
+            //Console.WriteLine("TEST : Boutton 2 clicked : " + valeur_soustraction);
 
         }
     }

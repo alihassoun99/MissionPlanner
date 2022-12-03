@@ -206,13 +206,15 @@ public partial class MAVLink
         new message_info(225, "EFI_STATUS", 142, 53, 65, typeof( mavlink_efi_status_t )),
         new message_info(226, "RPM", 207, 8, 8, typeof( mavlink_rpm_t )),
 
-        // Delta : Nouveax message mavelink
+        // _____________________________________________________________________________________________________________________________________________________________________________________ 
+        // Projet_Delta
+        // Projet_Delta : Nouveax message mavelink
         new message_info(227, "SIDESLIP", 237, 2, 2, typeof( mavlink_sideslip_t )),
         new message_info(228, "CAPTEUR_CHARGE", 237, 2, 2, typeof( mavlink_capteur_charge_t )),
         new message_info(229, "CAPTEUR_RPM", 237, 2, 2, typeof( mavlink_capteur_rpm_t )),
         new message_info(237, "RECIVE_CALCULE", 237, 2, 2, typeof( mavlink_recive_calcule_t )),
         new message_info(236, "SEND_CALCUL_MICRO", 237, 2, 2, typeof( mavlink_commande_calcule_t )),
-
+        // _____________________________________________________________________________________________________________________________________________________________________________________ 
         //
 
         new message_info(230, "ESTIMATOR_STATUS", 163, 42, 42, typeof( mavlink_estimator_status_t )),
@@ -479,13 +481,16 @@ public partial class MAVLink
         EFI_STATUS = 225,
         RPM = 226,
 
+        // Projet_Delta
         // Nouveax message mavelink
+        // _____________________________________________________________________________________________________________________________________________________________________________________ 
         SIDESLIP = 227,
         CAPTEUR_CHARGE = 228,
         CAPTEUR_RPM = 229,
         RECEIVE_CALCUL_MICRO = 237,
         SEND_CALCUL_MICRO = 236,
         //
+        // _____________________________________________________________________________________________________________________________________________________________________________________ 
 
         ESTIMATOR_STATUS = 230,
         WIND_COV = 231,
@@ -7270,9 +7275,9 @@ public partial class MAVLink
         public  float rpm2;
     
     };
+    // _____________________________________________________________________________________________________________________________________________________________________________________ 
+    // Nouveau message mavlink : Projet_Delta
 
-    // Nouveau message mavlink : DELTA
-    
     [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
     ///<summary> sideslip sensor output. </summary>
     public struct mavlink_sideslip_t
@@ -7289,6 +7294,8 @@ public partial class MAVLink
 
     };
 
+    // Projet_Delta
+
     [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
     ///<summary> charge sensor output. </summary>
     public struct mavlink_capteur_charge_t
@@ -7304,6 +7311,8 @@ public partial class MAVLink
         public System.Int16 charge;
 
     };
+
+    // Projet_Delta
 
     [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
     ///<summary> rpm sensor output. </summary>
@@ -7339,6 +7348,8 @@ public partial class MAVLink
 
     };
 
+    // Projet_Delta
+
     [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 4)]
     ///<summary> charge sensor output. </summary>
     public struct mavlink_recive_calcule_t
@@ -7354,6 +7365,8 @@ public partial class MAVLink
         public System.Int32 resultat;
 
     };
+    // _____________________________________________________________________________________________________________________________________________________________________________________ 
+
 
     [StructLayout(LayoutKind.Sequential,Pack=1,Size=51)]
     ///<summary> Read registers for a device. </summary>
@@ -14907,7 +14920,7 @@ public partial class MAVLink
     
     };
 
-    // DELTA
+    // Projet_Delta
 
     [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 40)]
     ///<summary> </summary>
