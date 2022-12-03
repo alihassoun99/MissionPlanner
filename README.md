@@ -82,3 +82,29 @@ You can debug Mission Planner on Mono with `MONO_LOG_LEVEL=debug mono MissionPla
 
 [![FlagCounter](https://s01.flagcounter.com/count2/A4bA/bg_FFFFFF/txt_000000/border_CCCCCC/columns_8/maxflags_40/viewers_0/labels_1/pageviews_0/flags_0/percent_0/)](https://info.flagcounter.com/A4bA)
 
+
+# Projet Delta
+## Pour pull : 
+- Git add .
+- Git submodule update (voir google)
+- Utiliser la ligne de commande pour changer la branche vers Dev : git checkout Dev (Dev avec un D majiscule)
+
+## Apres le pull et checkout fonctionne :
+- Installer les Dependences que visual studio propose a partir de visual sudio installer (normalement il s'ouvre automatiquement) : .NET / SDK
+- Installer les librairies necessaires pour le plugin : LiveCharts / LiveCharts.WinForms / LiveCharts.Wpf/PresentationFramwork ( à partir de NuGet Manager) , si c'est deja installer il faut juste référer au bon endroit le .dll de la librairie dans le dossier locale (ca peut etre dans MissionPlanner/pachages/...)
+- Les Packages de LiveCharts sont normalement dans : MissionPlanner/packages/…./…dll on les apportent en ajouter des references manuellement au projet du GraphiquePlugin
+- Il faut être sur du chemin de la sortie du .dll dans les propriétés du projet : C:\Users\aliha\Documents\MissionPlanner\bin\Debug\net461\plugins    :   GraphiquePlugin.dll
+
+![image](https://user-images.githubusercontent.com/43253813/205459700-d74f490d-425f-484b-8641-746eee4dfbe6.png)
+
+## Changements
+
+Pour trouver les parties de codes ajouté :  **chercher dans le code : Ctrl+F (ou find in files): Projet_Delta**
+
+Le Projet de Plugin se trouve dans Plugins/GraphiquePlugin
+### Les fishiers changé à l'Exterieure du projet plugin :
+- MissionPlanner\ExtLibs\ArduPilot\Mavlink\MAVLinkInterface.cs
+- Missionplanner\ExtLibs\Mavlink\Mavlink.cs
+- Missionplanner\ExtLibs\Mavlink\message_definitions\ardupilotmega.xml
+- Missionplanner\ExtLibs\ArduPilot\CurrentState.cs
+
